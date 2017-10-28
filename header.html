@@ -2,55 +2,62 @@
 <html>
 <head>
 <style>
-body {margin:0;}
-
-.topnav {
-  overflow: hidden;
-  background-color: #333;
+body {
+    margin: 0;
 }
 
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
 }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
 }
 
-.topnav a.active {
+li a.active {
     background-color: #4CAF50;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
     color: white;
 }
 </style>   
 </head>
 
 <body>
+
 <div class="container">
     <h2>Add new content</h2>
     <ul class="nav nav-topbar">
-        <li><a href= "">Add actor/director</a></li>
-        <li><a href= "">Add movie</a></li>
-        <li><a href= "">Add review</a></li>
-        <li><a href= "">Add movie/actor relation</a></li>
-        <li><a href= "">Add movie/director relation</a></li>
+        <li><a href= "Actor">Add Actor/director</a></li>
+        <li><a href= "Movie">Add Movie</a></li>
+        <li><a href= "Review">Add Review</a></li>
+        <li><a href= "Relation">Add Movie/Actor Relation</a></li>
+        <li><a href= "Relation2">Add Movie/Director Relation</a></li>
     </ul>
 
     <br />
+    <h2>Browsering Content :</h2>
     <ul class="nav nav-topbar">
-        <li><a href="">Show actor info</a></li>
-        <li><a href="">Show movie info</a></li>
+        <li><a href="">Show Actor information</a></li>
+        <li><a href="">Show Movie information</a></li>
     </ul>
     <br />
-
+    <h2>Search Interface:</h2>
     <ul class="nav nav-topbar">
-        <li><a href="">Search for actors/movies</a></li>
+        <li><a href="">Search Actor/Movie</a></li>
     </ul>
     <br />
 </div>
