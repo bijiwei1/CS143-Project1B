@@ -164,6 +164,13 @@
             exit(1);
         }
 
+        //Update MaxMovieID
+        $query = "INSERT INTO MaxMovieID (id) VALUES ($new_id)";
+        if (!$result = mysql_query($query)){
+            echo "Failed to update the MaxMovieID";
+            exit(1);
+        }
+
         mysql_close($db_connection);  
 	}
 
