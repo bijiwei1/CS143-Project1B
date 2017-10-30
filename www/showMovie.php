@@ -1,33 +1,43 @@
 <html>
 <head>
     <style  type="text/css">
-    table, td, th {
-        border: 1px grey;
+    table, th, td {
+        border: 1px solid blue;
+        
     }
     input[type="text"]{
-			height: 30px;
-			border: 1px solid grey;
-    		border-radius: 5px;
-    		width: 30%;
-		}
+            height: 30px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 30%;
+        }
     </style>
 </head>
 
 <body>
-<div class="nav_bar">
-<h1>Searching Page:</h1>
-<form action="" method="GET">
-    Search:<br/>
-    <input type="text" name="Search..." /><br/><br/>
-    <input type="submit" value="Click Me!" />
-</form>
+    <div class="nav_bar">
+    <h1>Searching Page:</h1>
+    <form action="showMovie.php" method="GET">
+        Search:<br/>
+        <input type="text" name="keyword" value="Search..." /><br/><br/>
+        <input type="submit" value="Click Me!" />
+    </form>
 
-<?php
-	if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
-		echo "Please enter keyword";
+    <?php
+    if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
+        echo "Please enter keyword";
         exit(1);
-	}
-    $keyword = $_GET[keyword];
+    }
+
+    $keywords = explode(" ", $_GET["keyword"]);
+    echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
+    for ($i = 0; $i < (count($keywords) - 1); $i++){
+        $condition .= "title LIKE '%" . $keywords[$i] . "%' AND ";
+    }
+    $last_id = count($keywords) - 1;
+    $condition .= "title LIKE '%" .$keywords[$last_id] . "%'";
+    $query = "select title, year from Movie where " . $condition . ";";
+    echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -42,21 +52,44 @@
         exit(1);
     }
 
-	if (!isset($_GET["mid"]) || $_GET["mid"] === ""){
-		echo "No movie founded";
-        exit(1);
-	}
+    //Search in "Movie"
+    if (!$result = mysql_query($query)){
+            echo "Failed to search in Movie";
+            exit(1);
+    }
 
-	
+    if (mysql_num_rows($result) === 0)
+        echo "No matching movies found.\n";
+    else
+        echo "Found movies:\n";
 
-	// Search Actor
-    $query = "SELECT * FROM Actor WHERE";
+        // Print table with results
+        echo "Showing Results\n";
+        echo "<table>\n";
+        echo "<tr>";
+        for ($i = 0; $i < mysql_num_fields($result); $i++) {
+            $field = mysql_fetch_field($result, $i);
+            echo "<td>" . $field->name . "</td>";
+        }
+        echo "</tr>\n";
+        while ($row = mysql_fetch_row($result)) {
+            echo "<tr>";
+            for ($i = 0; $i < mysql_num_fields($result); $i++) {
+                $val = $row[$i];
+                if (is_null($val)){
+                    $val = "N/A";
+                }
+                echo "<td>" . $val . "</td>";
+            }
+            echo "</tr>\n";
+        }    
+        echo "</table>\n";
 
+        mysql_free_result($result);
+        mysql_close($db_connection);
 
-       
-
-?>
-</div>	
-
+    
+    ?>
+    </div>  
 </body>
 </html>
