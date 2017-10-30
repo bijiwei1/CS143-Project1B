@@ -118,7 +118,7 @@
         $old_id = $row[0];
         $new_id = $old_id + 1;
         mysql_free_result($result);
-        echo "new id is " . $new_id;
+        echo "old id is " . $old_id . "new id is " . $new_id;
 
         //Add to "Movie"
         $query = "INSERT INTO Movie (id, title, year, rating, company) VALUES ($new_id, $title, $year, $rating, $company)";
