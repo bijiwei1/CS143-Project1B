@@ -9,7 +9,10 @@
         }
 
         #movie {
-            width:150px;
+            height: 30px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 60%;
         }
     </style>
 </head>
@@ -34,6 +37,7 @@
 <h1>Add new Movie and Actor Relation</h1>
 
 <form action="" method="POST">  
+    Movie<br\>
     <select name="movie" id = "movie">
     <option movie_title=""></option>
     <?php 
@@ -59,6 +63,9 @@
 
         while ($row = mysql_fetch_row($result)) {
             $movie_title = $row[0];
+            if (is_null($val)){
+                $movie_title = "N/A";
+            }
             echo '<option value="'. $movie_title .'</option>';
         }
     ?>
