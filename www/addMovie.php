@@ -115,8 +115,8 @@
             exit(1);
         }
         $row = mysql_fetch_assoc($result);
-        $curr_id = $row["id"];
-        $new_id = $curr_id + 1;
+        $old_id = $row[0];
+        $new_id = $old_id + 1;
         mysql_free_result($result);
         echo "new id is " . $new_id;
 
@@ -124,6 +124,13 @@
         $query = "INSERT INTO Movie (id, title, year, rating, company) VALUES ($new_id, $title, $year, $rating, $company)";
 		if (!$result = mysql_query($query)){
         	echo "Failed to add to Movie";
+            exit(1);
+        }
+
+        //Update MaxMovieID
+        $query = "UPDATE MaxMovieID SET id = $new_id where id = $old_id";
+        if (!$result = mysql_query($query)){
+            echo "Failed to update the MaxMovieID";
             exit(1);
         }
 
@@ -158,18 +165,12 @@
         }  
 
         //Add to "Sales"
-        $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES ($id, $tickets, $income)";
+        $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES ($new_id, $tickets, $income)";
         if (!$result = mysql_query($query)){
             echo "Failed to add to Sales";
             exit(1);
         }
 
-        //Update MaxMovieID
-        $query = "INSERT INTO MaxMovieID (id) VALUES ($new_id)";
-        if (!$result = mysql_query($query)){
-            echo "Failed to update the MaxMovieID";
-            exit(1);
-        }
 
         mysql_close($db_connection);  
 	}
