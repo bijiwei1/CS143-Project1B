@@ -34,7 +34,7 @@
         $condition .= "title LIKE '%" . $keywords[$i] . "%' AND ";
     }
     $last_id = count($keywords) - 1;
-    $condition .= "title LIKE '%" .$keywords[$last_id] . "%";
+    $condition .= "title LIKE '%" .$keywords[$last_id] . "%'";
     $query = "select title, year from Movie where " . $condition . ";";
     echo $query;
 
@@ -62,27 +62,31 @@
     else
         echo "Found movies:\n";
 
-    for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $field = mysql_fetch_field($result, $i);
-            echo "<td>" . $field->name . "</td>";
-    }
-
-    echo "</tr>\n";
-    while ($row = mysql_fetch_row($result)) {
+        // Print table with results
+        echo "Showing Results\n";
+        echo "<table>\n";
         echo "<tr>";
         for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $val = $row[$i];
-            if (is_null($val)){
-                $val = "N/A";
-            }
-            echo "<td>" . $val . "</td>";
+            $field = mysql_fetch_field($result, $i);
+            echo "<td>" . $field->name . "</td>";
         }
         echo "</tr>\n";
-    }    
-    echo "</table>\n";
+        while ($row = mysql_fetch_row($result)) {
+            echo "<tr>";
+            for ($i = 0; $i < mysql_num_fields($result); $i++) {
+                $val = $row[$i];
+                if (is_null($val)){
+                    $val = "N/A";
+                }
+                echo "<td>" . $val . "</td>";
+            }
+            echo "</tr>\n";
+        }    
+        echo "</table>\n";
 
-    mysql_free_result($result);
-    mysql_close($db_connection);
+        mysql_free_result($result);
+        mysql_close($db_connection);
+
 	
     ?>
     </div>  
