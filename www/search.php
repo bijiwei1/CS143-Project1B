@@ -92,7 +92,7 @@
         $condition .= "(last LIKE '%" . $keywords[$i] . "%' Or first LIKE '%" . $keywords[$i] . "%') AND" ;
     }
     $last_id = count($keywords) - 1;
-    $condition .= "(last LIKE '%" . $keywords[$last_id] . "%' Or first LIKE '%" .               $keywords[$last_id] . "%') ;";
+    $condition .= "(last LIKE '%" . $keywords[$last_id] . "%' Or first LIKE '%" .               $keywords[$last_id] . "%')";
     $query = "select * from Actor where " . $condition . ";";
     echo $query;
 
