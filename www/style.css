@@ -1,5 +1,6 @@
 .nav_bar  {
-    width: 200px;
+	float:left;
+    width: 20%;
 }
 
 .nav_bar a {
@@ -17,4 +18,9 @@
 .nav_bar a.active {
     background-color: #4CAF50;
     color: white;
+}
+
+.target{
+	float: right;
+	width:65%;
 }

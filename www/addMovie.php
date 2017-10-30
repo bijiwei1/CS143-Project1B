@@ -1,5 +1,6 @@
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
 	<style type="text/css">
 		input[type="text"]{
 			height: 30px;
@@ -10,7 +11,23 @@
 </head>
 <body>
 <div class="nav_bar">
-<h1>Add new Movie:</h1>
+    <h3>Add new content</h3>
+    <a href="addMovie.php"> Add Movie</a>
+    <a href="addActorDir.php"> Add Actor/Director</a>  
+    <a href="addReview.php"> Add Review</a>
+    <a href="addMARelation"> Add Movie/Actor Relation</a>
+    <a href="addMDRelation"> Add Movie/Director Relation</a>
+    <h3>Browsering Content</h3>
+    <a href="showActor.php"> Show Actor information</a>
+    <a href="showMovie.php"> Show Movie information</a>
+    </ul>
+    <h3>Search Actor/Movie</h3>
+    <a href="search.php"> Search Actor/Movie</a>
+    <br />
+</div>
+
+<div class="target">
+<h1>Add new Movie</h1>
 <form action="" method="POST">	
 	Title<br/><input type="text" name="title" size= "100" value= " Enter Title"/><br/><br />
 	Company<br/> <input type="text" name="company" size= "100" value= " Enter Company"/><br/><br/>
@@ -46,10 +63,10 @@
         <input type="checkbox" name="genre_Western" value="Western">Western</input>
         <br/><br/>
 		(Optional)<br/>
-        IMDB Rating: <input type="text" name="imdb" maxlength="3"><br/>
-        Rotten Tomatoes Rating: <input type="text" name="rot" maxlength="3"><br/>
-        Tickets Sold: <input type="text" name="tickets" maxlength="11"><br/>
-        Total Income: <input type="text" name="income" maxlength="11"><br/>
+        IMDB Rating<br/> <input type="text" name="imdb" maxlength="3" size = 100><br/><br/>
+        Rotten Tomatoes Rating<br/> <input type="text" name="rot" maxlength="3" size = 100><br/><br/>
+        Tickets Sold<br/> <input type="text" name="tickets" maxlength="11" size = 100><br/><br/>
+        Total Income<br/> <input type="text" name="income" maxlength="11" size = 100><br/>
         <br/><br/>
         <input type="submit" value="Add movie"/>
 </form>
@@ -63,6 +80,7 @@
     $rot = $_POST["rot"];
     $tickets = $_POST["tickets"];
     $income = $_POST["income"];
+    $succeed = true; 
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($year))
     {
@@ -124,14 +142,14 @@
         $query = "INSERT INTO Movie (id, title, year, rating, company) VALUES ($new_id, $title, $year, $rating, $company)";
 		if (!$result = mysql_query($query)){
         	echo "Failed to add to Movie";
-            exit(1);
+            $succeed = false; 
         }
 
         //Update MaxMovieID
         $query = "UPDATE MaxMovieID SET id = $new_id where id = $old_id";
         if (!$result = mysql_query($query)){
             echo "Failed to update the MaxMovieID";
-            exit(1);
+            $succeed = false; 
         }
 
         //Add to "MovieGenre"
@@ -145,7 +163,7 @@
                 $query = "INSERT INTO MovieGenre (mid,genre) VALUES ($new_id, '$genre')";
                 if (!$result = mysql_query($query)){
                 	echo "Failed to add to MovieGenre";
-         		 	exit(1);
+         		 	$succeed = false;;
                 }                  
             } 
         }
@@ -154,23 +172,30 @@
         $query = "INSERT INTO MovieRating (mid, imdb, rot) VALUES ($new_id, $imdb, $rot)";
          if (!$result = mysql_query($query)){
                 echo "Failed to add to MovieRating";
-         		exit(1);
+         		$succeed = false;
         }  
 
         //Add to "MovieRating"
         $query = "INSERT INTO MovieRating (mid, imdb, rot) VALUES ($new_id, $imdb, $rot)";
         if (!$result = mysql_query($query)){
             echo "Failed to add to MovieRating";
-            exit(1);
+            $succeed = false;
         }  
 
         //Add to "Sales"
         $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES ($new_id, $tickets, $income)";
         if (!$result = mysql_query($query)){
             echo "Failed to add to Sales";
-            exit(1);
+            $succeed = false;
         }
 
+        if ($succeed){
+            mysql_query("COMMIT");
+            echo "Successfully added a new Actor/Director";
+        }else {
+            mysql_query("ROLLBACK");
+            echo "Unsuccessfully added"
+        
 
         mysql_close($db_connection);  
 	}
