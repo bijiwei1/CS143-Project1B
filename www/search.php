@@ -31,11 +31,11 @@
     $keywords = explode(" ", $_GET["keyword"]);
     echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
     for ($i = 0; $i < (count($keywords) - 1); $i++){
-        $condition = "title LIKE '%" . $keywords[$i] . "%' AND ";
+        $condition .= "title LIKE '%" . $keywords[$i] . "%' AND ";
     }
     $last_id = count($keywords) - 1;
     $condition .= "title LIKE '%" .$keywords[$last_id] . "%";
-    $query = "select title from Movie where " . $condition . ";";
+    $query = "select title, year from Movie where " . $condition . ";";
     echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
@@ -51,7 +51,38 @@
         exit(1);
     }
 
+    //Search in "Movie"
+    if (!$result = mysql_query($query)){
+            echo "Failed to search in Movie";
+            exit(1);
+    }
 
+    if (mysql_num_rows($result) === 0)
+        echo "No matching movies found.\n";
+    else
+        echo "Found movies:\n";
+
+    for ($i = 0; $i < mysql_num_fields($result); $i++) {
+            $field = mysql_fetch_field($result, $i);
+            echo "<td>" . $field->name . "</td>";
+    }
+
+    echo "</tr>\n";
+    while ($row = mysql_fetch_row($result)) {
+        echo "<tr>";
+        for ($i = 0; $i < mysql_num_fields($result); $i++) {
+            $val = $row[$i];
+            if (is_null($val)){
+                $val = "N/A";
+            }
+            echo "<td>" . $val . "</td>";
+        }
+        echo "</tr>\n";
+    }    
+    echo "</table>\n";
+
+    mysql_free_result($result);
+    mysql_close($db_connection);
 	
     ?>
     </div>  
