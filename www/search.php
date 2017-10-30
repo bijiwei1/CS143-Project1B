@@ -1,8 +1,9 @@
 <html>
 <head>
     <style  type="text/css">
-    table, td, th {
-        border: 1px grey;
+    table, th, td {
+        border: 1px solid blue;
+        
     }
     input[type="text"]{
 			height: 30px;
