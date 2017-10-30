@@ -66,7 +66,6 @@
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($year))
     {
-
         $db_connection = mysql_connect("localhost", "cs143", "");
 
         if (!$db_connection){
@@ -158,17 +157,14 @@
         }  
 
         //Add to "Sales"
-        $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES (";
-        $query .= "$id, $tickets, $income)";
+        $query = "INSERT INTO Sales (mid, ticketsSold, totalIncome) VALUES ($id, $tickets, $income)";
         if (!$result = mysql_query($query)){
             echo "Failed to add to Sales";
             exit(1);
         }
 
         mysql_close($db_connection);  
-	}else {
-        echo "Need to input title and year";
-    }
+	}
 
 ?> 
 
