@@ -27,14 +27,14 @@
 		echo "Please enter keyword";
         exit(1);
 	}
-    
-    $keywords = explode(" ", $_GET["keyword"]);
 
+    $keywords = explode(" ", $_GET["keyword"]);
+    echo $keywords . "\n";
     for ($i = 0; $i < count($keywords) - 1; $i++){
-        $condition = "mid LIKE '%" . mysql_real_escape_string($keywords[$i]) . "%' AND";
+        $condition = "title LIKE '%" . mysql_real_escape_string($keywords[$i]) . "%' AND";
     }
     $condition .= mysql_real_escape_string($keywords[$i]);
-    $query .= $condition . ";";
+    $query = "select title from Movie where" . $condition . ";";
     echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
