@@ -9,8 +9,8 @@
 	</style>
 </head>
 <body>
+<div class="nav_bar">
 <h1>Add new Movie</h1>
-
 <form action="" method="POST">	
 	Title<br/><input type="text" name="title" size= "100" value= " Enter Title"/><br/><br />
 	Company<br/> <input type="text" name="company" size= "100" value= " Enter Company"/><br/><br/>
@@ -54,14 +54,11 @@
         <input type="submit" value="Add movie"/>
 </form>
 
-
-<div class="nav_bar">
 <?php
     $title = $_POST["title"];
     $year = $_POST["year"];
     $rating = $_POST["rating"];
     $company = $_POST["company"];
-    $did = $_POST["did"];
     $imdb = $_POST["imdb"];
     $rot = $_POST["rot"];
     $tickets = $_POST["tickets"];
@@ -176,7 +173,8 @@
         mysql_close($db_connection);  
 	}
 
-?>
+?> 
+
 </div>
 
 
