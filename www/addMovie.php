@@ -64,11 +64,6 @@
     $tickets = $_POST["tickets"];
     $income = $_POST["income"];
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && (empty($title) || empty($year)){
-        echo "Title or year is missing";
-        exit(1);
-    }
-
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($title) && !empty($year))
     {
 
@@ -171,7 +166,9 @@
         }
 
         mysql_close($db_connection);  
-	}
+	}else {
+        echo "Need to input title and year";
+    }
 
 ?> 
 
