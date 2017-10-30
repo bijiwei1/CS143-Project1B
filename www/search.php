@@ -30,11 +30,12 @@
 
     $keywords = explode(" ", $_GET["keyword"]);
     echo "Keywords are" . $keywords . "\n";
-    for ($i = 0; $i < count($keywords) - 1; $i++){
+    for ($i = 0; $i < (count($keywords) - 1); $i++){
         $condition = "title LIKE '%" . $keywords[$i] . "%' AND";
     }
-    $condition .= $keywords[$i];
-    $query = "select title from Movie where" . $condition . ";";
+    $last_id = count($keywords) - 1;
+    $condition .= "title LIKE '%" .$keywords[$last_id] . "%";
+    $query = "select title from Movie where " . $condition . ";";
     echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
