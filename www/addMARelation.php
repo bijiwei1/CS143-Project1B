@@ -47,7 +47,7 @@
 
         //Find all movies
         $query = "SELECT title FROM Movie ORDER BY title ASC";
-
+        echo "Found query: "$query;
         foreach($query as $movie => $movie_title) 
         {
            $movie = htmlspecialchars($category); 
@@ -56,7 +56,7 @@
     ?>
     </select>
 
-    <input type="submit" value="Add!"/>
+    <br/><br/><br/><input type="submit" value="Add!"/>
 </form> 
 
 </div>
