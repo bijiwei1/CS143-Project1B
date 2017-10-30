@@ -29,9 +29,9 @@
 	}
 
     $keywords = explode(" ", $_GET["keyword"]);
-    echo "Keywords are" . $keywords . "\n";
+    echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
     for ($i = 0; $i < (count($keywords) - 1); $i++){
-        $condition = "title LIKE '%" . $keywords[$i] . "%' AND";
+        $condition = "title LIKE '%" . $keywords[$i] . "%' AND ";
     }
     $last_id = count($keywords) - 1;
     $condition .= "title LIKE '%" .$keywords[$last_id] . "%";
