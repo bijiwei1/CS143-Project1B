@@ -7,6 +7,10 @@
             border: 1px solid grey;
             border-radius: 5px;
         }
+
+        #movie {
+            width:150px;
+        }
     </style>
 </head>
 <body>
@@ -30,7 +34,7 @@
 <h1>Add new Movie and Actor Relation</h1>
 
 <form action="" method="POST">  
-    <select name="category_id">
+    <select name="movie" id = "movie">
     <option movie_title=""></option>
     <?php 
         $db_connection = mysql_connect("localhost", "cs143", "");
