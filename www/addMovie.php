@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="nav_bar">
-<h1>Add new Movie</h1>
+<h1>Add new Movie:</h1>
 <form action="" method="POST">	
 	Title<br/><input type="text" name="title" size= "100" value= " Enter Title"/><br/><br />
 	Company<br/> <input type="text" name="company" size= "100" value= " Enter Company"/><br/><br/>
@@ -109,13 +109,13 @@
             $income = "NULL";
 
         //Get new ID for new movie
-        $get_id_query = "SELECT id FROM MaxMovieID";
-        if (!$result = mysql_query($get_id_query)){
+        $query = "SELECT id FROM MaxMovieID";
+        if (!$result = mysql_query($query)){
         	echo "Failed to find maxmovieID ";
             exit(1);
         }
         $row = mysql_fetch_assoc($result);
-        $old_id = $row[0];
+        $old_id = $row["id"];
         $new_id = $old_id + 1;
         mysql_free_result($result);
         echo "old id is " . $old_id . "new id is " . $new_id;
