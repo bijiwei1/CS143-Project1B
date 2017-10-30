@@ -29,11 +29,11 @@
 	}
 
     $keywords = explode(" ", $_GET["keyword"]);
-    echo $keywords . "\n";
+    echo "Keywords are" . $keywords . "\n";
     for ($i = 0; $i < count($keywords) - 1; $i++){
-        $condition = "title LIKE '%" . mysql_real_escape_string($keywords[$i]) . "%' AND";
+        $condition = "title LIKE '%" . $keywords[$i] . "%' AND";
     }
-    $condition .= mysql_real_escape_string($keywords[$i]);
+    $condition .= $keywords[$i];
     $query = "select title from Movie where" . $condition . ";";
     echo $query;
 
