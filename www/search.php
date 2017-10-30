@@ -27,14 +27,14 @@
 		echo "Please enter keyword";
         exit(1);
 	}
-    echo "Here";
+    
     $keywords = explode(" ", $_GET["keyword"]);
 
-    for ($i = 0; i < count($keywords) - 1; i++){
-        $condition = "mid LIKE '%" . mysql_real_escape_string($keywords[i]) . "%' AND"
+    for ($i = 0; $i < count($keywords) - 1; $i++){
+        $condition = "mid LIKE '%" . mysql_real_escape_string($keywords[$i]) . "%' AND";
     }
-    $condition = $condition . mysql_real_escape_string($keywords[i]);
-    $query = $query . $condition . ";";
+    $condition .= mysql_real_escape_string($keywords[$i]);
+    $query .= $condition . ";";
     echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
