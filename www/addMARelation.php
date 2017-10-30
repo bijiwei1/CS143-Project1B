@@ -37,8 +37,7 @@
 <h1>Add new Movie and Actor Relation</h1>
 
 <form action="" method="POST">  
-    Movie<br\>
-    <select name="movie" id = "movie">
+
     <option movie_title=""></option>
     <?php 
         $db_connection = mysql_connect("localhost", "cs143", "");
@@ -61,15 +60,20 @@
             exit(1);
         }
 
+        echo "Movie<br\>";
+        echo "<select name=\"movie\" id = \"movie\">";
         while ($row = mysql_fetch_row($result)) {
             $movie_title = $row[0];
-            if (is_null($val)){
+            if (is_null($row[0])){
                 $movie_title = "N/A";
             }
             echo '<option value="'. $movie_title .'</option>';
         }
+        echo "</select>";
+
+        mysql_close($db_connection);
     ?>
-    </select>
+
 
     <br/><br/><br/><input type="submit" value="Add!"/>
 </form> 
