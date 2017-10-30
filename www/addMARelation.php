@@ -28,6 +28,7 @@
 
 <div class="target">
 <h1>Add new Movie and Actor Relation</h1>
+
 <form action="" method="POST">  
     <select name="category_id">
     <option movie_title=""></option>
@@ -47,11 +48,14 @@
 
         //Find all movies
         $query = "SELECT title FROM Movie ORDER BY title ASC";
-        echo "Found query: "$query;
-        foreach($query as $movie => $movie_title) 
-        {
-           $movie = htmlspecialchars($category); 
-           echo '<option value="'. $movie_title .'</option>';
+        if (!$result = mysql_query($query)){
+            echo "Failed to search in Movie";
+            exit(1);
+        }
+
+        while ($row = mysql_fetch_row($result)) {
+            $movie_title = $row[0];
+            echo '<option value="'. $movie_title .'</option>';
         }
     ?>
     </select>
