@@ -88,10 +88,9 @@
             exit(1);
         }
 
-        //declare all variables 
+        //convert title to readable formate
         $title = "'" . mysql_real_escape_string($title) . "'";
-        $did = (int) $did;
-        $year = (int) $year;
+
         if (!empty($rating))
             $rating = "'" . mysql_real_escape_string($rating) . "'";
         else
