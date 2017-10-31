@@ -110,6 +110,17 @@
         }    
     echo "</table>\n";
 
+    //Show comment
+    $query = "SELECT * FROM Review  WHERE mid=" . $id .";";
+    while ($row = mysql_fetch_assoc($result)) {
+            $name = $row["name"] . " " . $row["last"]; 
+            $time = $row["time"];
+            $rating = $row["rating"];
+            $comment = $row["comment"];
+            echo = $name . "rates the this movie with score " . $rating . " and left a review at " .$time;
+            echo = "comment: " . $comment;
+    }  
+
     mysql_free_result($result);
     mysql_close($db_connection);
     ?>
