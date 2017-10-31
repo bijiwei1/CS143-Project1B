@@ -21,7 +21,7 @@
 </div>
 
 <div class="target">
-    <h1>Show Actor Information<h1>
+    <h1>Show Movie Information<h1>
     <form action="seach" method="GET">
         Search:<br/>
         <input type="text" name="keyword" value="Search..." /><br/><br/>

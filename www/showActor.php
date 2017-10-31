@@ -105,7 +105,7 @@
             $mid = $row["id"];
             echo "<tr>";
                 echo "<td>" . $role . "</td>";
-                echo "<td>" . "<a href=\"./showMovie.php?id=$id\">$title</a>" . "</td>";
+                echo "<td>" . "<a href=\"./showMovie.php?id=$mid\">$title</a>" . "</td>";
             echo "</tr>\n";
         }    
     echo "</table>\n";
