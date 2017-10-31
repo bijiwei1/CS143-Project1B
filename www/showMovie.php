@@ -63,14 +63,14 @@
     }
 
     //print actor info
-    echo "Movie Information is : \n";
-    echo "<table>\n";
+    echo "Movie Information is : <br/>";
+    echo "<table>";
     echo "<tr>";
     for ($i = 0; $i < mysql_num_fields($result); $i++) {
         $field = mysql_fetch_field($result, $i);
         echo "<td>" . $field->name . "</td>";
     }
-    echo "</tr>\n";
+    echo "</tr>";
     while ($row = mysql_fetch_row($result)) {
         echo "<tr>";
         for ($i = 0; $i < mysql_num_fields($result); $i++) {
