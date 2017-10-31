@@ -90,6 +90,7 @@
          echo "Connection failed for given query " ;
         exit(1);
     }
+
     //print actor's movie and row
     echo "Actor's Movies and Roles";
     echo "<table>\n";
@@ -107,7 +108,7 @@
                 echo "<td>" . "<a href=\"./showMovie.php?mid=$mid\">$title</a>" . "</td>";
             echo "</tr>\n";
         }    
-    echo "</table>\n"
+    echo "</table>\n";
 
     mysql_free_result($result);
     mysql_close($db_connection);
