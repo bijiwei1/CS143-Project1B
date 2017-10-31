@@ -111,7 +111,6 @@
     $last_id = count($keywords) - 1;
     $condition .= "(last LIKE '%" . $keywords[$last_id] . "%' Or first LIKE '%" .               $keywords[$last_id] . "%')";
     $query = "select * from Actor where " . $condition . "ORDER BY dob;";
-    echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
 

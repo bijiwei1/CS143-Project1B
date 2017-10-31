@@ -22,9 +22,9 @@
 
 <div class="target">
     <h1>Show Actor Information<h1>
-    <form action="" method="GET">
+    <form action="seach" method="GET">
         Search:<br/>
-        <input type="text" name="aid" value="Search..." /><br/><br/>
+        <input type="text" name="keyword" value="Search..." /><br/><br/>
         <input type="submit" value="Click Me!" />
     </form>
 
@@ -85,7 +85,7 @@
     echo "</table>\n";
 
     //Find Actor's Movies and Role info
-    $query = "SELECT * FROM MovieActor WHERE aid=" . $aid . ";";
+    $query = "SELECT ma.role, m.title FROM MovieActor as ma, Movie as m  WHERE ma.aid=" . $aid . " AND ma.mid = m.id;";
     if (!$result = mysql_query($query)){
          echo "Connection failed for given query " ;
         exit(1);
