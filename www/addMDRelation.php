@@ -42,7 +42,7 @@
     $mid_tmp = explode("-", $_POST["movie"]);
     $mid = (int)$mid_tmp[0];
     $did_tmp = explode("-", $_POST["director"]);
-    $did = (int)$aid_tmp[0];
+    $did = (int)$did_tmp[0];
 
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($did)){
