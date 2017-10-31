@@ -39,11 +39,11 @@
 <?php
 
     //get input variables
-    $mid = $_POST["movie"];
-    $aid = $_POST["actor"];
+    $mid = (int)explode(" - ", $_GET["movie"]);
+    $aid = (int)explode(" - ", $_GET["actor"]);
     $role = $_POST["role"];
 
-    echo "Information: " $mid . $aid . $role;
+    echo "Information: " . $mid . $aid . $role;
 
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($aid) && !empty($role)){
         $db_connection = mysql_connect("localhost", "cs143", "");
@@ -59,6 +59,7 @@
             exit(1);
         }
 
+
         $query = "INSERT INTO MovieActor (mid, aid, role) VALUES ( $mid, $aid, mysql_real_escape_string($role);";
 
         if (!$result = mysql_query($query)){
@@ -67,7 +68,7 @@
         }
             
         mysql_close($db_connection); 
-        }
+        
     }   
 
 
@@ -89,7 +90,7 @@
         }
 
         //Find all movies
-        $query = "SELECT title FROM Movie ORDER BY title ASC;";
+        $query = "SELECT * FROM Movie ORDER BY title ASC;";
         if (!$result = mysql_query($query)){
             echo "Failed to search in Movie";
             exit(1);
@@ -100,7 +101,7 @@
         while ($row = mysql_fetch_assoc($result)) {
             $movie_title = $row["title"];
             $mid = $row["id"];
-            echo "<option>" . $movie_title . "</option>";
+            echo "<option>" . $mid . " - " . $movie_title . "</option>";
         }    
         echo "</select><br/>";
 
@@ -117,7 +118,7 @@
             $first = $row["first"];
             $last = $row["last"];
             $aid = $row["id"];
-            echo "<option>" . $last . ", " . $first . "</option>";
+            echo "<option>" . $aid . " - "$last . ", " . $first . "</option>";
         }    
         echo "</select><br/>";
 
