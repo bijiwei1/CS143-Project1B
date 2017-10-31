@@ -36,6 +36,35 @@
 <div class="target">
 <h1>Add new Movie and Actor Relation</h1>
 
+<?php
+
+    //get input variables
+    $mid = $_POST["movie"];
+    $aid = $_POST["actor"];
+    $role = $_POST["role"];
+
+    echo $mid . $aid . $role;
+    
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($aid) && !empty($role)){
+        $db_connection = mysql_connect("localhost", "cs143", "");
+
+        if (!$db_connection){
+            echo "Connection failed: " . mysql_error($db_connection) . "\n";
+            exit(1);
+        }
+
+        $db_selected = mysql_select_db("CS143", $db_connection);
+        if (!$db_selected){
+            echo "Connection failed: " . mysql_error($db_selected) . "\n";
+            exit(1);
+        }
+
+
+        mysql_close($db_connection); 
+    }   
+
+
+?>
 <form action="" method="POST">  
 
     <?php 
@@ -63,12 +92,13 @@
         echo '<select name="movie" id="select_bar">';
         while ($row = mysql_fetch_assoc($result)) {
             $movie_title = $row["title"];
+            $mid = $row["id"];
             echo "<option>" . $movie_title . "</option>";
         }    
         echo "</select><br/>";
 
         //Find all Actor
-        $query = "SELECT * FROM Actor ORDER BY title ASC;";
+        $query = "SELECT * FROM Actor ORDER BY last ASC;";
         if (!$result = mysql_query($query)){
             echo "Failed to search in Movie";
             exit(1);
@@ -79,15 +109,17 @@
         while ($row = mysql_fetch_assoc($result)) {
             $first = $row["first"];
             $last = $row["last"];
+            $aid = $row["id"];
             echo "<option>" . $last . ", " . $first . "</option>";
         }    
-        echo "</select><br/>"
+        echo "</select><br/>";
 
         mysql_free_result($result);
         mysql_close($db_connection);
 
     ?>
 
+    <br/>Role: <input type="text" name="role" maxlength="50" size="100"/>
 
     <br/><br/><br/><input type="submit" value="Add!"/>
 </form> 
