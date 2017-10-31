@@ -110,7 +110,7 @@
     }
     $last_id = count($keywords) - 1;
     $condition .= "(last LIKE '%" . $keywords[$last_id] . "%' Or first LIKE '%" .               $keywords[$last_id] . "%')";
-    $query = "select * from Actor where " . $condition . ";";
+    $query = "select * from Actor where " . $condition . "ORDER BY dob;";
     echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
@@ -140,7 +140,9 @@
     echo "Actor Information is : \n";
     echo "<table>\n";
     echo "<tr>";
-    echo "<td>ID</tb><tb>Name</td><tb>Date of Birth</tb>";
+    echo "<td>ID</tb>"
+    echo "<tb>Name</td>"
+    echo "<tb>Date of Birth</tb>";
     echo "</tr>\n";
 
     while ($row = mysql_fetch_assoc($result)) {
