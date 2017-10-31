@@ -22,7 +22,7 @@
 
 <div class="target">
     <h1>Show Movie Information<h1>
-    <form action="seach" method="GET">
+    <form action="search.php" method="GET">
         Search:<br/>
         <input type="text" name="keyword" value="Search..." /><br/><br/>
         <input type="submit" value="Click Me!" />
