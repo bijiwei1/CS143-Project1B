@@ -39,8 +39,10 @@
 <?php
 
     //get input variables
-    $mid = (int)explode("-", $_POST["movie"]);
-    $aid = (int)explode("-", $_POST["actor"]);
+    $mid_tmp = explode("-", $_POST["movie"]);
+    $mid = $mid_tmp[0];
+    $aid_tmp = explode("-", $_POST["actor"]);
+    $aid = $aid_tmp[0];
     $role = $_POST["role"];
 
     echo "Information: " . $mid . $aid . $role;
