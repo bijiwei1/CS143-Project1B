@@ -29,7 +29,7 @@
     </form>
 
     <?php
-    if (!isset($_GET["aid"]) || $_GET["aid"] === ""){
+    if (!isset($_GET["id"]) || $_GET["id"] === ""){
         echo "Please enter keyword";
         exit(1);
     }
