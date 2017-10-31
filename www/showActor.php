@@ -1,18 +1,6 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <style  type="text/css">
-    table, th, td {
-        border: 1px solid blue;
-        
-    }
-    input[type="text"]{
-			height: 30px;
-			border: 1px solid grey;
-    		border-radius: 5px;
-    		width: 30%;
-		}
-    </style>
 </head>
 
 <body>
@@ -33,31 +21,18 @@
 </div>
 
 <div class="target">
-    <h1>Search Actor</h1>
-    <form action="" method="GET">
+    <h1>Show Actor Information<h1>
+    <form action="search.php" method="GET">
         Search:<br/>
-        <input type="text" name="keyword" value="Search..." /><br/><br/>
+        <input type="text" name="aid" value="Search..." /><br/><br/>
         <input type="submit" value="Click Me!" />
     </form>
 
     <?php
-	if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
-		echo "Please enter keyword";
+    if (!isset($_GET["aid"]) || $_GET["aid"] === ""){
+        echo "Please enter keyword";
         exit(1);
-	}
-    //store keywords 
-    $keywords = explode(" ", $_GET["keyword"]);
-    echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
-
-    //Search for Actor
-    $condition = ""; 
-    for ($i = 0; $i < (count($keywords) - 1); $i++){
-        $condition .= "(last LIKE '%" . $keywords[$i] . "%' Or first LIKE '%" . $keywords[$i] . "%') AND" ;
     }
-    $last_id = count($keywords) - 1;
-    $condition .= "(last LIKE '%" . $keywords[$last_id] . "%' Or first LIKE '%" .               $keywords[$last_id] . "%')";
-    $query = "select * from Actor where " . $condition . ";";
-    echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -70,20 +45,25 @@
     if (!$db_selected){
         echo "Connection failed: " . mysql_error($db_selected) . "\n";
         exit(1);
-    }
+    }    
 
+
+    $aid = (int) $_GET["aid"];
+
+    // Find actor info
+    $query = "SELECT * FROM Actor WHERE id=" . $aid . ";";
     if (!$result = mysql_query($query)){
-            echo "Failed to search in Movie";
-            exit(1);
+         echo "Connection failed for given query " ;
+        exit(1);
     }
 
-    if (mysql_num_rows($result) === 0)
-        echo "No matching Actor found.\n";
-    else
-        echo "Found Actor:\n";
+    if (mysql_num_rows($result) != 1){
+        echo "Failed to find actor by given id";
+        exit(1);
+    }
 
-    // Print table with results
-    echo "Showing Results\n";
+    //print actor info
+    echo "Actor Information is : \n";
     echo "<table>\n";
     echo "<tr>";
     for ($i = 0; $i < mysql_num_fields($result); $i++) {
@@ -104,13 +84,39 @@
     }    
     echo "</table>\n";
 
-
+    //Find Actor's Movies and Role info
+    $query = "SELECT * FROM MovieActor WHERE aid=" . $aid . ";";
+    if (!$result = mysql_query($query)){
+         echo "Connection failed for given query " ;
+        exit(1);
+    }
+    //print actor's movie and row
+    echo "Actor Information is : \n";
+    echo "<table>\n";
+    echo "<tr>";
+    for ($i = 0; $i < mysql_num_fields($result); $i++) {
+        $field = mysql_fetch_field($result, $i);
+        echo "<td>" . $field->name . "</td>";
+    }
+    echo "</tr>\n";
+    while ($row = mysql_fetch_row($result)) {
+        echo "<tr>";
+        for ($i = 0; $i < mysql_num_fields($result); $i++) {
+            $val = $row[$i];
+            if (is_null($val)){
+                $val = "N/A";
+            }
+            echo "<td>" . $val . "</td>";
+        }
+        echo "</tr>\n";
+    }    
+    echo "</table>\n";
+    
 
     mysql_free_result($result);
     mysql_close($db_connection);
-
-	
     ?>
-    </div>  
+</div>
+
 </body>
 </html>

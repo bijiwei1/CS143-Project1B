@@ -24,3 +24,15 @@
 	float: right;
 	width:65%;
 }
+
+table, th, td {
+        border: 1px solid blue;
+        
+}
+
+input[type="text"]{
+        height: 30px;
+        border: 1px solid grey;
+        border-radius: 5px;
+        width: 30%;
+}
