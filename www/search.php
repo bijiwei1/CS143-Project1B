@@ -117,18 +117,18 @@
     }
 
     if (mysql_num_rows($result) === 0)
-        echo "No matching Actor found.\n";
+        echo "No matching Actor found.<br/>";
     else
-        echo "\nFound Actor:\n";
+        echo "<br/>Found Actor:<br/>";
 
     // Print table with results
-    echo "Actor Information is : \n";
-    echo "<br/><table>\n";
+    echo "Actor Information is : <br/>";
+    echo "<br/><table>";
     echo "<tr>";
         echo "<td>ID</td>";
         echo "<td>Name</td>";
         echo "<td>Date of Birth</td>";
-    echo "</tr>\n";
+    echo "</tr>";
 
     while ($row = mysql_fetch_assoc($result)) {
         echo "<tr>";
@@ -138,9 +138,9 @@
             echo "<td>" . $aid . "</td>";
             echo "<td>" . "<a href=\"./showActor.php?aid=$aid\">$name</a>" . "</td>";
             echo "<td>" . $dob . "</td>";
-        echo "</tr>\n";
+        echo "</tr>";
     }    
-    echo "</table>\n";
+    echo "</table>";
 
     mysql_free_result($result);
     mysql_close($db_connection);
