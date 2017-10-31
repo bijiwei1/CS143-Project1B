@@ -34,7 +34,7 @@
 </div>
 
 <div class="target">
-<h1>Add new Movie and Actor Relation</h1>
+<h1>Add new Review</h1>
 
 <?php
 
@@ -61,15 +61,17 @@
         }
 
 
-        $query = "INSERT INTO Review (name, time, mid, rating, comment) VALUES ($name, NOW(), $mid, $rating, $comment)";
+        $query = "INSERT INTO Review (name, time, mid, rating, comment) VALUES ('$name', NOW(), $mid, $rating, '$comment');";
 
         if (!$result = mysql_query($query)){
             echo "Failed to add Review";
             exit(1);
         }
-            
         mysql_close($db_connection); 
-        echo "Successfully added Review";
+
+        echo "Successfully added Review/n";
+        echo "Movie(id: " . $mid . ") by Reviewer " . $name . " at Time" . NOW();
+        echo "Rating: " .$rating . "Comment: " . $comment;
     }   
 
 
