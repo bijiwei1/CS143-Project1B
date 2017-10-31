@@ -8,7 +8,7 @@
             border-radius: 5px;
         }
 
-        #movie {
+        #select_bar {
             height: 30px;
             border: 1px solid grey;
             border-radius: 5px;
@@ -60,12 +60,28 @@
         }
 
         echo "Movie: ";
-        echo '<select name="movie" id="movie">';
+        echo '<select name="movie" id="select_bar">';
         while ($row = mysql_fetch_assoc($result)) {
             $movie_title = $row["title"];
             echo "<option>" . $movie_title . "</option>";
         }    
         echo "</select><br/>";
+
+        //Find all Actor
+        $query = "SELECT * FROM Actor ORDER BY title ASC;";
+        if (!$result = mysql_query($query)){
+            echo "Failed to search in Movie";
+            exit(1);
+        }
+
+        echo "Actor: ";
+        echo '<select name="actor" id="select_bar">';
+        while ($row = mysql_fetch_assoc($result)) {
+            $first = $row["first"];
+            $last = $row["last"];
+            echo "<option>" . $last . ", " . $first . "</option>";
+        }    
+        echo "</select><br/>"
 
         mysql_free_result($result);
         mysql_close($db_connection);
