@@ -112,7 +112,7 @@
     }    
     echo "</table>\n";
 
-    echo "Actor's Movies and Roles"
+    echo "Actor's Movies and Roles";
     echo "<table>\n";
         echo "<tr>";
             echo "<td>" . "Role" . "</td>";
@@ -124,7 +124,7 @@
             $role = $row["role"];
             echo "<tr>";
                 echo "<td>" . $role . "</td>";
-                echo "<td>" . "<a href=\"./show_movie_info.php?mid=$mid\">$title</a>" . "</td>";
+                echo "<td>" . "<a href=\"./showMovie.php?mid=$mid\">$title</a>" . "</td>";
             echo "</tr>\n";
         }    
         echo "</table>\n"
