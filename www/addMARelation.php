@@ -45,8 +45,6 @@
     $aid = (int)$aid_tmp[0];
     $role = $_POST["role"];
 
-    echo "Information: " . $mid . $aid . $role;
-
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($aid) && !empty($role)){
         $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -70,7 +68,7 @@
         }
             
         mysql_close($db_connection); 
-        
+        echo "Successfully added relation";
     }   
 
 
