@@ -126,7 +126,11 @@
             $time = $row["time"];
             $rating = $row["rating"];
             $comment = $row["comment"];
-            echo = $name . "rates the this movie with score " . $rating . " and left a review at " .$time;
+            if (empty($rating))
+                $rating = "n/a";
+            if (empty($comment))
+                $comment = "";
+            echo = $name . "rates the this movie with score " . $rating . " and left a review at " . $time;
             echo = "comment: " . $comment;
     }  
     }
