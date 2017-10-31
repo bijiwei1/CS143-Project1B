@@ -45,8 +45,10 @@
     $rating = (int)$_POST["rating"];
     $comment = $_POST["comment"];
 
+    echo "Movie(id: " . $mid . ") by Reviewer " . $name . "/n";
+    echo "Rating: " .$rating . "Comment: " . $comment;
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($reviewer_name) && !empty($rating) && !empty($comment)){
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($name)){
         $db_connection = mysql_connect("localhost", "cs143", "");
 
         if (!$db_connection){
@@ -62,8 +64,6 @@
 
         $name = "'" . $name . "'";
         $comment = "'" . $comment . "'";
-        echo "Movie(id: " . $mid . ") by Reviewer " . $name . "/n";
-        echo "Rating: " .$rating . "Comment: " . $comment;
 
         $query = "INSERT INTO Review (name, time, mid, rating, comment) VALUES ( $name, NOW(), $mid, $rating, $comment);";
 
@@ -114,7 +114,7 @@
     ?>
 
     <br/>Reviewer name<br/><input type="text" name="reviewer_name" maxlength="20" size="100"/><br/>
-    <br/>Rating><br/> 
+    <br/>Rating<br/> 
     <select id="rate" name="rating">
         <option value="0">0</option>
         <option value="1">1</option>
