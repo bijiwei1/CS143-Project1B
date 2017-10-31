@@ -22,7 +22,7 @@
 
 <div class="target">
     <h1>Show Actor Information<h1>
-    <form action="search.php" method="GET">
+    <form action="" method="GET">
         Search:<br/>
         <input type="text" name="aid" value="Search..." /><br/><br/>
         <input type="submit" value="Click Me!" />
@@ -111,7 +111,7 @@
         echo "</tr>\n";
     }    
     echo "</table>\n";
-    
+
 
     mysql_free_result($result);
     mysql_close($db_connection);
