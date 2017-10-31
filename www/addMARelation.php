@@ -62,7 +62,7 @@
         }
 
 
-        $query = "INSERT INTO MovieActor (mid, aid, role) VALUES ($mid, $aid, $role);";
+        $query = "INSERT INTO MovieActor (mid, aid, role) VALUES ($mid, $aid, " . "'" . $role . "');";
 
         if (!$result = mysql_query($query)){
             echo "Failed to add Movie/Actor Relation ";
@@ -76,7 +76,6 @@
 
 ?>
 <form action="" method="POST">  
-
     <?php 
         $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -114,7 +113,7 @@
             exit(1);
         }
 
-        echo "Actor<br/>";
+        echo "<br/>Actor<br/>";
         echo '<select name="actor" id="select_bar">';
         while ($row = mysql_fetch_assoc($result)) {
             $first = $row["first"];
@@ -129,7 +128,7 @@
 
     ?>
 
-    <br/>Role: <input type="text" name="role" maxlength="50" size="100"/>
+    <br/>Role<br/><input type="text" name="role" maxlength="50" size="100"/>
 
     <br/><br/><br/><input type="submit" value="Add!"/>
 </form> 
