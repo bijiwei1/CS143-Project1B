@@ -111,29 +111,42 @@
     echo "</table>\n";
 
     //Show comment
-    $query = "SELECT * FROM Review  WHERE mid=" . $id .";";
-    if (!$result = mysql_query($query)){
-         echo "Connection failed for given query ";
-        exit(1);
+  // All reviews
+    $query = "SELECT avg(rating), count(rating) FROM Review
+           WHERE mid=" . $id;
+    if(!$result = mysql_query($query))
+        die("Error executing query: " . mysql_error());
+     $row = mysql_fetch_row($result);
+    $avgrat = $row[0];
+    $countrat = $row[1];
+     if (is_null($avgrat))
+        echo "Average Score: N/A. \n";
+    else
+        echo "Average Score: $avgrat/5 by $countrat review(s). \n";
+    mysql_free_result($result);
+
+    $query = "SELECT name, time, rating, comment FROM Review
+           WHERE mid=" . $id . " ORDER BY time DESC";
+    if(!$result = mysql_query($query))
+        die("Error executing query: " . mysql_error());
+
+    echo "<a href=\"./add_review.php\">Add Review Here!</a><br/>\n";
+    echo "All Comments Displayed With Details:";
+    while ($row = mysql_fetch_assoc($result)) {
+        $name = $row["name"];
+        $time = $row["time"];
+        $rating = $row["rating"];
+        $comment = $row["comment"];
+        if (empty($rating))
+            $rating = "n/a";
+        if (empty($comment))
+            $comment = "";
+
+        echo "<br/><br/>\n";
+        echo "On $time, <b>$name</b> rated this movie a score of $rating star(s). The rater said: <br/>\n";
+        echo "$comment\n";
     }
 
-    if (mysql_num_rows($result) != 1){
-        echo "No reviews exist";
-        exit(1);
-    }
-    while ($row = mysql_fetch_assoc($result)) {
-            $name = $row["name"] . " " . $row["last"]; 
-            $time = $row["time"];
-            $rating = $row["rating"];
-            $comment = $row["comment"];
-            if (empty($rating))
-                $rating = "n/a";
-            if (empty($comment))
-                $comment = "";
-            echo = $name . "rates the this movie with score " . $rating . " and left a review at " . $time . "<br/>";
-            echo = "comment: " . $comment;
-    }  
-    
     mysql_free_result($result);
     mysql_close($db_connection);
     ?>
