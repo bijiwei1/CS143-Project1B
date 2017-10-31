@@ -53,7 +53,7 @@
         }
 
         //Find all movies
-        $query = "SELECT title FROM Movie ORDER BY title ASC;";
+        $query = "SELECT * FROM Movie ORDER BY title ASC;";
         if (!$result = mysql_query($query)){
             echo "Failed to search in Movie";
             exit(1);
