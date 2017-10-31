@@ -39,8 +39,8 @@
 <?php
 
     //get input variables
-    $mid = (int)explode(" - ", $_POST["movie"]);
-    $aid = (int)explode(" - ", $_POST["actor"]);
+    $mid = explode("-", $_POST["movie"]);
+    $aid = explode("-", $_POST["actor"]);
     $role = $_POST["role"];
 
     echo "Information: " . $mid . $aid . $role;
@@ -101,7 +101,7 @@
         while ($row = mysql_fetch_assoc($result)) {
             $movie_title = $row["title"];
             $mid = $row["id"];
-            echo "<option>" . $mid . " - " . $movie_title . "</option>";
+            echo "<option>" . $mid . "-" . $movie_title . "</option>";
         }    
         echo "</select><br/>";
 
@@ -118,7 +118,7 @@
             $first = $row["first"];
             $last = $row["last"];
             $aid = $row["id"];
-            echo "<option>" . $aid . " - "$last . ", " . $first . "</option>";
+            echo "<option>" . $aid . "-"$last . ", " . $first . "</option>";
         }    
         echo "</select><br/>";
 
