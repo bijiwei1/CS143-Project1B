@@ -45,9 +45,6 @@
     $rating = (int)$_POST["rating"];
     $comment = $_POST["comment"];
 
-    echo "Movie(id: " . $mid . ") by Reviewer " . $name . "/n";
-    echo "Rating: " .$rating . "Comment: " . $comment;
-
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($name)){
         $db_connection = mysql_connect("localhost", "cs143", "");
 

@@ -1,22 +1,74 @@
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <style  type="text/css">
     table, th, td {
         border: 1px solid blue;
         
     }
     input[type="text"]{
-			height: 30px;
-			border: 1px solid grey;
-    		border-radius: 5px;
-    		width: 30%;
-		}
+            height: 30px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 30%;
+        }
     </style>
 </head>
 
 <body>
-    <div class="nav_bar">
-    <h1>Searching Page:</h1>
+<div class="nav_bar">
+    <h3>Add new content</h3>
+    <a href="addMovie.php"> Add Movie</a>
+    <a href="addActorDir.php"> Add Actor/Director</a>  
+    <a href="addReview.php"> Add Review</a>
+    <a href="addMARelation.php"> Add Movie/Actor Relation</a>
+    <a href="addMDRelation.php"> Add Movie/Director Relation</a>
+    <h3>Browsering Content</h3>
+    <a href="showActor.php"> Show Actor information</a>
+    <a href="showMovie.php"> Show Movie information</a>
+    </ul>
+    <h3>Search Actor/Movie</h3>
+    <a href="search.php"> Search Actor/Movie</a>
+    <br />
+</div>
+
+<div class="target">
+    <h1>Search Actor</h1><html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <style  type="text/css">
+    table, th, td {
+        border: 1px solid blue;
+        
+    }
+    input[type="text"]{
+            height: 30px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 30%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="nav_bar">
+    <h3>Add new content</h3>
+    <a href="addMovie.php"> Add Movie</a>
+    <a href="addActorDir.php"> Add Actor/Director</a>  
+    <a href="addReview.php"> Add Review</a>
+    <a href="addMARelation.php"> Add Movie/Actor Relation</a>
+    <a href="addMDRelation.php"> Add Movie/Director Relation</a>
+    <h3>Browsering Content</h3>
+    <a href="showActor.php"> Show Actor information</a>
+    <a href="showMovie.php"> Show Movie information</a>
+    </ul>
+    <h3>Search Actor/Movie</h3>
+    <a href="search.php"> Search Actor/Movie</a>
+    <br />
+</div>
+
+<div class="target">
+    <h1>Searching Page</h1>
     <form action="search.php" method="GET">
         Search:<br/>
         <input type="text" name="keyword" value="Search..." /><br/><br/>
