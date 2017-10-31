@@ -130,7 +130,7 @@
     if(!$result = mysql_query($query))
         die("Error executing query: " . mysql_error());
 
-    echo "<a href=\"./add_review.php\">Add Review Here!</a><br/>\n";
+    echo "<a href=\"addReview.php\"><br/>Add Review Here!</a><br/>\n";
     echo "All Comments Displayed With Details:";
     while ($row = mysql_fetch_assoc($result)) {
         $name = $row["name"];
