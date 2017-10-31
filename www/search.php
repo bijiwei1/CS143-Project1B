@@ -31,7 +31,6 @@
     <?php
 	if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
 		echo "Please enter keyword";
-        exit(1);
 	}
     //store keywords 
     $keywords = explode(" ", $_GET["keyword"]);
@@ -65,9 +64,9 @@
     }
 
     if (mysql_num_rows($result) === 0)
-        echo "No matching movies found.\n";
+        echo "No matching movies found.<br/>";
     else
-        echo "Found movies:\n";
+        echo "Found movies:<br/>";
 
     // Print table with results
     echo "<br/><table>\n";
