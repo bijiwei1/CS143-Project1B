@@ -1,18 +1,6 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <style  type="text/css">
-    table, th, td {
-        border: 1px solid blue;
-        
-    }
-    input[type="text"]{
-            height: 30px;
-            border: 1px solid grey;
-            border-radius: 5px;
-            width: 30%;
-        }
-    </style>
 </head>
 
 <body>
@@ -33,28 +21,18 @@
 </div>
 
 <div class="target">
-    <h1>Search Movie</h1>
-    <form action="showMovie.php" method="GET">
+    <h1>Show Actor Information<h1>
+    <form action="seach" method="GET">
         Search:<br/>
         <input type="text" name="keyword" value="Search..." /><br/><br/>
         <input type="submit" value="Click Me!" />
     </form>
 
     <?php
-    if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
+    if (!isset($_GET["aid"]) || $_GET["aid"] === ""){
         echo "Please enter keyword";
         exit(1);
     }
-
-    $keywords = explode(" ", $_GET["keyword"]);
-    echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
-    for ($i = 0; $i < (count($keywords) - 1); $i++){
-        $condition .= "title LIKE '%" . $keywords[$i] . "%' AND ";
-    }
-    $last_id = count($keywords) - 1;
-    $condition .= "title LIKE '%" .$keywords[$last_id] . "%'";
-    $query = "select title, year from Movie where " . $condition . ";";
-    echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -67,7 +45,13 @@
     if (!$db_selected){
         echo "Connection failed: " . mysql_error($db_selected) . "\n";
         exit(1);
-    }
+    }    
+
+
+    $aid = (int) $_GET["aid"];
+
+    // Find actor info
+    $query = "SELECT * FROM Actor WHERE id=" . $aid . ";";
 
     //Search in "Movie"
     if (!$result = mysql_query($query)){
@@ -88,20 +72,18 @@
             $field = mysql_fetch_field($result, $i);
             echo "<td>" . $field->name . "</td>";
         }
-        echo "</tr>\n";
-        while ($row = mysql_fetch_row($result)) {
+
+        while ($row = mysql_fetch_assoc($result)) {
             echo "<tr>";
-            for ($i = 0; $i < mysql_num_fields($result); $i++) {
-                $val = $row[$i];
-                if (is_null($val)){
-                    $val = "N/A";
-                }
-                echo "<td>" . $val . "</td>";
-            }
+            $mid = "$row[mid]";
+            $role = $row["role"];
+            echo "<td>" . $aid . "</td>";
+            echo "<td>" . "<a href=\"./show_movie_info.php?mid=$mid\">$title ($year)</a>" . "</td>";
             echo "</tr>\n";
         }    
-        echo "</table>\n";
-
+        echo "</table>\n";  
+         echo "<td><a href=\"./show_movie_info.php?mid=$mid\">$title ($year)</a></td>";
+       
         mysql_free_result($result);
         mysql_close($db_connection);
 

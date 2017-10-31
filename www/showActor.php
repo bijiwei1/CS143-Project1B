@@ -112,6 +112,22 @@
     }    
     echo "</table>\n";
 
+    echo "Actor's Movies and Roles"
+    echo "<table>\n";
+        echo "<tr>";
+            echo "<td>" . "Role" . "</td>";
+            echo "<td>" . "Movie" . "</td>";
+        echo"</tr>";
+
+        while ($row = mysql_fetch_assoc($result)) {
+            $title = "$row[mid]";
+            $role = $row["role"];
+            echo "<tr>";
+                echo "<td>" . $role . "</td>";
+                echo "<td>" . "<a href=\"./show_movie_info.php?mid=$mid\">$title</a>" . "</td>";
+            echo "</tr>\n";
+        }    
+        echo "</table>\n"
 
     mysql_free_result($result);
     mysql_close($db_connection);
