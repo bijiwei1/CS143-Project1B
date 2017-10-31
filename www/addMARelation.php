@@ -53,19 +53,17 @@
         }
 
         //Find all movies
-        $query = "SELECT * FROM Movie ORDER BY title ASC;";
+        $query = "SELECT title FROM Movie ORDER BY title ASC;";
         if (!$result = mysql_query($query)){
             echo "Failed to search in Movie";
             exit(1);
         }
 
-        echo "Movie: "
-        echo "<select name="movie">";
+        echo "Movie: ";
+        echo '<select name="movie" id="movie">';
         while ($row = mysql_fetch_assoc($result)) {
-            $title = $row["title"];
-            $year = $row["year"];
-            $mid = $row["id"];
-            echo "<option>" . $title . "</option>";
+            $movie_title = $row["title"];
+            echo "<option>" . $movie_title . "</option>";
         }    
         echo "</select><br/>";
 
