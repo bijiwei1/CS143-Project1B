@@ -43,8 +43,8 @@
     $aid = $_POST["actor"];
     $role = $_POST["role"];
 
-    echo $mid . $aid . $role;
-    
+    echo "Information: " $mid . $aid . $role;
+
     if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($aid) && !empty($role)){
         $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -59,8 +59,15 @@
             exit(1);
         }
 
+        $query = "INSERT INTO MovieActor (mid, aid, role) VALUES ( $mid, $aid, mysql_real_escape_string($role);";
 
+        if (!$result = mysql_query($query)){
+            echo "Failed to add Movie/Actor Relation ";
+            exit(1);
+        }
+            
         mysql_close($db_connection); 
+        }
     }   
 
 
@@ -88,7 +95,7 @@
             exit(1);
         }
 
-        echo "Movie: ";
+        echo "Movie <br/>";
         echo '<select name="movie" id="select_bar">';
         while ($row = mysql_fetch_assoc($result)) {
             $movie_title = $row["title"];
@@ -104,7 +111,7 @@
             exit(1);
         }
 
-        echo "Actor: ";
+        echo "Actor<br/>";
         echo '<select name="actor" id="select_bar">';
         while ($row = mysql_fetch_assoc($result)) {
             $first = $row["first"];
