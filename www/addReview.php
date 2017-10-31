@@ -7,6 +7,13 @@
             border: 1px solid grey;
             border-radius: 5px;
         }
+
+        #select_bar {
+            height: 30px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 60%;
+        }
     </style>
 </head>
 <body>
@@ -27,31 +34,19 @@
 </div>
 
 <div class="target">
-<h1>Add new Review</h1>
-<form action="" method="POST">  
-    <input type="radio" name="identity" value="Actor" checked="true">Actor
-        <input type="radio" name="identity" value="Director">Director<br /><br />
-    
-    First Name<br /> <input type="text" name="first" maxlength="20" size=100><br /><br />
-    Last Name<br />  <input type="text" name="last" maxlength="20" size=100><br /><br />
-    Sex<br /> <input type="radio" name="sex" value="Male" checked="true">Male
-        <input type="radio" name="sex" value="Female">Female<br /><br />
-    Date of Birth<br />  <input type="text" name="dob" size=100><br /><br />
-    Date of Death<br />  <input type="text" name="dod" size=100><br />
-    (Leave blank if alive now) <br /><br /><br/>
-    <input type="submit" value="Add!"/>
-</form>
+<h1>Add new Movie and Actor Relation</h1>
 
 <?php
-    $last = $_POST["last"];
-    $first = $_POST["first"];
-    $sex = $_POST["sex"];
-    $identity = $_POST["identity"];
-    $dob = $_POST["company"];
-    $dod = $_POST["imdb"];
-    $succeed = true;
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($last) && !empty($first))
-    {
+
+    //get input variables
+    $mid_tmp = explode("-", $_POST["movie"]);
+    $mid = (int)$mid_tmp[0];
+    $name = $_POST["reviewer_name"];
+    $rating = (int)$_POST["rating"];
+    $comment = $_POST["comment"];
+
+
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($reviewer_name) && !empty($rating) && !empty($comment)){
         $db_connection = mysql_connect("localhost", "cs143", "");
 
         if (!$db_connection){
@@ -65,66 +60,69 @@
             exit(1);
         }
 
-        //convert title to readable formate
-        $first = "'" . mysql_real_escape_string($first). "'";
-        $last = "'" . mysql_real_escape_string($last) . "'";
-        $sex = "'" . mysql_real_escape_string($sex) . "'";
-        $dob = "'" . mysql_real_escape_string($dob) . "'";
 
-        if (!empty($dod))
-            $dod = "'" . mysql_real_escape_string($dod) . "'";
-        else
-            $dod = "NULL";
+        $query = "INSERT INTO Review (name, time, mid, rating, comment) VALUES ($name, NOW(), $mid, $rating, $comment)";
 
-        //Get new ID for new person
-        $query = "SELECT id FROM MaxPersonID";
         if (!$result = mysql_query($query)){
-            echo "Failed to find maxmovieID ";
+            echo "Failed to add Review";
             exit(1);
         }
-        $row = mysql_fetch_assoc($result);
-        $old_id = $row["id"];
-        $new_id = $old_id + 1;
+            
+        mysql_close($db_connection); 
+        echo "Successfully added Review";
+    }   
+
+
+?>
+<form action="" method="POST">  
+    <?php 
+        $db_connection = mysql_connect("localhost", "cs143", "");
+
+        if (!$db_connection){
+            echo "Connection failed: " . mysql_error($db_connection) . "\n";
+            exit(1);
+        }
+
+        $db_selected = mysql_select_db("CS143", $db_connection);
+        if (!$db_selected){
+            echo "Connection failed: " . mysql_error($db_selected) . "\n";
+            exit(1);
+        }
+
+        //Find all movies
+        $query = "SELECT * FROM Movie ORDER BY title ASC;";
+        if (!$result = mysql_query($query)){
+            echo "Failed to search in Movie";
+            exit(1);
+        }
+
+        echo "Movie <br/>";
+        echo '<select name="movie" id="select_bar">';
+        while ($row = mysql_fetch_assoc($result)) {
+            $movie_title = $row["title"];
+            $mid = $row["id"];
+            echo "<option>" . $mid . "-" . $movie_title . "</option>";
+        }    
+        echo "</select><br/>";
+
         mysql_free_result($result);
-        echo "old id is " . $old_id . "new id is " . $new_id;
+        mysql_close($db_connection);
+    ?>
 
-        //Add to "Actor"
-        if ($identity === "Actor"){
-            $query = "INSERT INTO Actor (id, last, first, sex, dob, dod) VALUES ($new_id, $last, $first, $sex, $dob, $dod)";
-            if (!$result = mysql_query($query)){
-                echo "Failed to add to Actor";
-                $succeed = false;
-            }
-        }
-        
-        //Add to "Director"
-        if ($identity === "Director"){
-            $query = "INSERT INTO Director (id, last, first, sex, dob, dod) VALUES ($new_id, $last, $first, $sex, $dob, $dod)";
-            if (!$result = mysql_query($query)){
-                echo "Failed to add to Director";
-                $succeed = false;
-            }
-        }
+    <br/>Reviewer name<br/><input type="text" name="reviewer_name" maxlength="20" size="100"/><br/>
+    <br/>Rating><br/> 
+    <select id="rate" name="rating">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select><br/><br/>
+    Comment<br/><input type="text" name="comment" maxlength="500" size="100"/>
 
-        //Update MaxPersonID
-        $query = "UPDATE MaxPersonID SET id = $new_id where id = $old_id";
-        if (!$result = mysql_query($query)){
-            echo "Failed to update the MaxMovieID";
-            exit(1);
-        }
-
-        if ($succeed){
-            mysql_query("COMMIT");
-            echo "Successfully added a new Actor/Director";
-        }else {
-            mysql_query("ROLLBACK");
-            echo "Unsuccessfully added";
-        }
-
-        mysql_close($db_connection);  
-    }
-
-?> 
+    <br/><br/><br/><input type="submit" value="Add!"/>
+</form> 
 
 </div>
 
