@@ -108,7 +108,7 @@
                 echo "<td>" . "<a href=\"./showActor.php?aid=$aid\">$name</a>" . "</td>";
             echo "</tr>\n";
         }    
-    echo "</table>\n"
+    echo "</table>\n";
 
     mysql_free_result($result);
     mysql_close($db_connection);
