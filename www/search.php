@@ -44,7 +44,7 @@
     $last_id = count($keywords) - 1;
     $condition .= "title LIKE '%" .$keywords[$last_id] . "%'";
     $query = "select title, year from Movie where " . $condition . ";";
-    echo $query;
+    //echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
 
