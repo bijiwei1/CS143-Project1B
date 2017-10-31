@@ -34,7 +34,7 @@
 </div>
 
 <div class="target">
-<h1>Add new Movie and Actor Relation</h1>
+<h1>Add new Movie and Director Relation</h1>
 
 <?php
 
