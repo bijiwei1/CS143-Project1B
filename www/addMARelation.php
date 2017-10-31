@@ -68,7 +68,7 @@
         }
             
         mysql_close($db_connection); 
-        echo "Successfully added relation";
+        echo "Successfully added Movie and Actor relation";
     }   
 
 
