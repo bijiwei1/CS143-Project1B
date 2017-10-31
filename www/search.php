@@ -24,14 +24,13 @@
     <h1>Searching Page</h1>
     <form action="search.php" method="GET">
         Search:<br/>
-        <input type="text" name="keyword" value="Search..." /><br/><br/>
+        <input type="text" name="keyword"/><br/><br/>
         <input type="submit" value="Click Me!" />
     </form>
 
     <?php
-	if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
-		echo "Please enter keyword";
-	}
+	if (isset($_GET["keyword"]) &&  (!$_GET["keyword"] === ""){
+	
     //store keywords 
     $keywords = explode(" ", $_GET["keyword"]);
     //echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
@@ -144,7 +143,7 @@
 
     mysql_free_result($result);
     mysql_close($db_connection);
-
+    }
     ?>
     </div>  
 </body>
