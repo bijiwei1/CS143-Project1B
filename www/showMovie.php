@@ -120,7 +120,7 @@
     if (mysql_num_rows($result) != 1){
         echo "No reviews exist";
         exit(1);
-    }else{
+    }
     while ($row = mysql_fetch_assoc($result)) {
             $name = $row["name"] . " " . $row["last"]; 
             $time = $row["time"];
@@ -130,10 +130,10 @@
                 $rating = "n/a";
             if (empty($comment))
                 $comment = "";
-            echo = $name . "rates the this movie with score " . $rating . " and left a review at " . $time;
+            echo = $name . "rates the this movie with score " . $rating . " and left a review at " . $time . "<br/>";
             echo = "comment: " . $comment;
     }  
-    }
+    
     mysql_free_result($result);
     mysql_close($db_connection);
     ?>
