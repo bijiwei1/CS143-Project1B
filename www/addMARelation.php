@@ -39,8 +39,8 @@
 <?php
 
     //get input variables
-    $mid = explode("-", $_POST["movie"]);
-    $aid = explode("-", $_POST["actor"]);
+    $mid = (int)explode("-", $_POST["movie"]);
+    $aid = (int)explode("-", $_POST["actor"]);
     $role = $_POST["role"];
 
     echo "Information: " . $mid . $aid . $role;
@@ -118,7 +118,7 @@
             $first = $row["first"];
             $last = $row["last"];
             $aid = $row["id"];
-            echo "<option>" . $aid . "-"$last . ", " . $first . "</option>";
+            echo "<option>" . $aid . "-" .  $last . ", " . $first . "</option>";
         }    
         echo "</select><br/>";
 
