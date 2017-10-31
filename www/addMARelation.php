@@ -63,13 +63,14 @@
         echo "<select name=\"movie\" id = \"movie\">";
         while ($row = mysql_fetch_row($result)) {
             $movie_title = $row["title"];
+            echo "Here" . $movie_title . "\n";
             if (is_null($row["title"])){
                 $movie_title = "N/A";
             }
             echo '<option value="'. $movie_title .'</option>';
         }
         echo "</select>";
-
+        echo "end";
         mysql_close($db_connection);
     ?>
 
