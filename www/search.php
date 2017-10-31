@@ -42,7 +42,7 @@
     }
     $last_id = count($keywords) - 1;
     $condition .= "title LIKE '%" .$keywords[$last_id] . "%'";
-    $query = "select title, year from Movie where " . $condition . ";";
+    $query = "select title, year, id from Movie where " . $condition . ";";
     //echo $query;
 
     $db_connection = mysql_connect("localhost", "cs143", "");
@@ -69,24 +69,23 @@
         echo "Found movies:<br/>";
 
     // Print table with results
-    echo "<br/><table>\n";
+    echo "Movie Information is : <br/>";
+    echo "<br/><table>";
     echo "<tr>";
-    for ($i = 0; $i < mysql_num_fields($result); $i++) {
-        $field = mysql_fetch_field($result, $i);
-        echo "<td>" . $field->name . "</td>";
-    }
-    echo "</tr>\n";
-    while ($row = mysql_fetch_row($result)) {
+        echo "<td>ID</td>";
+        echo "<td>Name</td>";
+        echo "<td>Date of Birth</td>";
+    echo "</tr>";
+
+    while ($row = mysql_fetch_assoc($result)) {
         echo "<tr>";
-        for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $val = $row[$i];
-            if (is_null($val)){
-                $val = "N/A";
-            }
-            echo "<td>" . $val . "</td>";
-        }
+            $year = $row["year"];
+            $id = $row["id"];
+            $title = $row["title"];
+            echo "<td>" . "<a href=\"./showMovie.php?id=$id\">$title</a>" . "</td>";
+            echo "<td>" . $year . "</td>";
         echo "</tr>";
-    }    
+    }  
     echo "</table><br/>";
 
     //Search for Actor
