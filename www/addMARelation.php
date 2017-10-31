@@ -39,8 +39,8 @@
 <?php
 
     //get input variables
-    $mid = (int)explode(" - ", $_GET["movie"]);
-    $aid = (int)explode(" - ", $_GET["actor"]);
+    $mid = (int)explode(" - ", $_POST["movie"]);
+    $aid = (int)explode(" - ", $_POST["actor"]);
     $role = $_POST["role"];
 
     echo "Information: " . $mid . $aid . $role;
@@ -60,7 +60,7 @@
         }
 
 
-        $query = "INSERT INTO MovieActor (mid, aid, role) VALUES ( $mid, $aid, mysql_real_escape_string($role);";
+        $query = "INSERT INTO MovieActor (mid, aid, role) VALUES ( $mid, $aid, $role);";
 
         if (!$result = mysql_query($query)){
             echo "Failed to add Movie/Actor Relation ";
