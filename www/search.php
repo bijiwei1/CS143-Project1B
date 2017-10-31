@@ -137,37 +137,23 @@
         echo "Found Actor:\n";
 
     // Print table with results
-    while ($row = mysql_fetch_assoc($result))
-    {
-        $name = "$row[first] $row[last]";
-        $aid = $row["id"];
-        echo "<a href=\"./show_actor_info.php?aid=$aid\">$name</a>";
-        echo "<br />\n";
-    }
-    
-
-    echo "Showing Results\n";
+    echo "Actor Information is : \n";
     echo "<table>\n";
     echo "<tr>";
-    for ($i = 0; $i < mysql_num_fields($result); $i++) {
-        $field = mysql_fetch_field($result, $i);
-        echo "<td>" . $field->name . "</td>";
-    }
+    echo "<td>ID</tb><tb>Name</td><tb>Date of Birth</tb>";
     echo "</tr>\n";
-    while ($row = mysql_fetch_row($result)) {
+
+    while ($row = mysql_fetch_assoc($result)) {
         echo "<tr>";
-        for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $val = $row[$i];
-            if (is_null($val)){
-                $val = "N/A";
-            }
-            echo "<td>" . $val . "</td>";
-        }
+            $name = "$row[first] $row[last]";
+            $aid = $row["id"];
+            $dob = $row["dob"];
+            echo "<td>" . $aid . "</td>";
+            echo "<td>" . "<a href=\"./show_actor_info.php?aid=$aid\">$name . </a>". "</td>";
+            echo "<td>" . $dob. "</td>";
         echo "</tr>\n";
     }    
     echo "</table>\n";
-
-
 
     mysql_free_result($result);
     mysql_close($db_connection);
