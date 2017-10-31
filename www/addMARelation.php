@@ -38,7 +38,6 @@
 
 <form action="" method="POST">  
 
-    <option movie_title=""></option>
     <?php 
         $db_connection = mysql_connect("localhost", "cs143", "");
 
@@ -54,7 +53,7 @@
         }
 
         //Find all movies
-        $query = "SELECT title FROM Movie ORDER BY title ASC";
+        $query = "SELECT title FROM Movie ORDER BY title ASC;";
         if (!$result = mysql_query($query)){
             echo "Failed to search in Movie";
             exit(1);
@@ -63,8 +62,8 @@
         echo "Movie<br\>";
         echo "<select name=\"movie\" id = \"movie\">";
         while ($row = mysql_fetch_row($result)) {
-            $movie_title = $row[0];
-            if (is_null($row[0])){
+            $movie_title = $row["title"];
+            if (is_null($row["title"])){
                 $movie_title = "N/A";
             }
             echo '<option value="'. $movie_title .'</option>';
