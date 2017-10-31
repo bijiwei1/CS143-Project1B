@@ -85,7 +85,7 @@
     echo "</table>\n";
 
     //Find Actor's Movies and Role info
-    $query = "SELECT ma.role, m.title, m.id FROM MovieActor as ma, Movie as m  WHERE ma.aid=" . $aid . " AND ma.mid = m.id;";
+    $query = "SELECT ma.role, m.title, m.id FROM MovieActor as ma, Movie as m  WHERE ma.aid=" . $aid . " AND ma.mid = m.id ORDER BY m.title;";
     if (!$result = mysql_query($query)){
          echo "Connection failed for given query " ;
         exit(1);
@@ -102,10 +102,10 @@
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row["title"];
             $role = $row["role"];
-            $mid = $row["id"];
+            $aid = $row["id"];
             echo "<tr>";
                 echo "<td>" . $role . "</td>";
-                echo "<td>" . "<a href=\"./showMovie.php?mid=$mid\">$title</a>" . "</td>";
+                echo "<td>" . "<a href=\"./showActor.php?aid=$aid\">$name</a>" . "</td>";
             echo "</tr>\n";
         }    
     echo "</table>\n";

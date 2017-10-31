@@ -48,10 +48,10 @@
     }    
 
 
-    $mid = (int) $_GET["mid"];
+    $id = (int) $_GET["id"];
 
     // Find actor info
-    $query = "SELECT * FROM Actor WHERE id=" . $aid . ";";
+    $query = "SELECT * FROM Movie WHERE id=" . $id . ";";
     if (!$result = mysql_query($query)){
          echo "Connection failed for given query " ;
         exit(1);
@@ -63,7 +63,7 @@
     }
 
     //print actor info
-    echo "Actor Information is : \n";
+    echo "Movie Information is : \n";
     echo "<table>\n";
     echo "<tr>";
     for ($i = 0; $i < mysql_num_fields($result); $i++) {
@@ -85,47 +85,27 @@
     echo "</table>\n";
 
     //Find Actor's Movies and Role info
-    $query = "SELECT ma.role, m.title, ma.mid FROM MovieActor as ma, Movie as m  WHERE ma.aid=" . $aid . " AND ma.mid = m.id;";
+    $query = "SELECT a.first, a.last, ma.role, a.id FROM MovieActor as ma, Actor as a  WHERE ma.mid=" . $id . " AND ma.aid = a.id ORDER BY a.first;";
     if (!$result = mysql_query($query)){
-         echo "Connection failed for given query " ;
+         echo "Connection failed for given query ";
         exit(1);
     }
     //print actor's movie and row
-    echo "Actor Information is : \n";
-    echo "<table>\n";
-    echo "<tr>";
-    for ($i = 0; $i < mysql_num_fields($result); $i++) {
-        $field = mysql_fetch_field($result, $i);
-        echo "<td>" . $field->name . "</td>";
-    }
-    echo "</tr>\n";
-    while ($row = mysql_fetch_row($result)) {
-        echo "<tr>";
-        for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $val = $row[$i];
-            if (is_null($val)){
-                $val = "N/A";
-            }
-            echo "<td>" . $val . "</td>";
-        }
-        echo "</tr>\n";
-    }    
-    echo "</table>\n";
+    echo "Actors in this Movie : \n";
 
-    echo "Actor's Movies and Roles";
     echo "<table>\n";
         echo "<tr>";
+            echo "<td>" . "Name" . "</td>";
             echo "<td>" . "Role" . "</td>";
-            echo "<td>" . "Movie" . "</td>";
         echo"</tr>";
 
         while ($row = mysql_fetch_assoc($result)) {
-            $title = $row["title"];
+            $name = $row["first"] . " " . $row["last"]; 
             $role = $row["role"];
-            $mid = $row["mid"];
+            $aid = $row["id"];
             echo "<tr>";
                 echo "<td>" . $role . "</td>";
-                echo "<td>" . "<a href=\"./showMovie.php?mid=$mid\">$title</a>" . "</td>";
+                 echo "<td>" . "<a href=\"./showActor.php?aid=$aid\">$name</a>" . "</td>";
             echo "</tr>\n";
         }    
     echo "</table>\n"
