@@ -67,7 +67,7 @@
             if (is_null($row["title"])){
                 $movie_title = "N/A";
             }
-            echo '<option value="'. $movie_title .'</option>';
+            echo "<option value=\"$movie\">$movie_title '</option>";
         }
         echo "</select>";
         echo "end";
