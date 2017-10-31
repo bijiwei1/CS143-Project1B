@@ -139,11 +139,11 @@
     // Print table with results
     echo "Actor Information is : \n";
     echo "<table>\n";
-    echo "<tr>";
-    echo "<td>ID</tb>"
-    echo "<tb>Name</td>"
-    echo "<tb>Date of Birth</tb>";
-    echo "</tr>\n";
+        echo "<tr>";
+        echo "<td>ID</td>"
+        echo "<td>Name</td>"
+        echo "<td>Date of Birth</td>";
+        echo "</tr>\n";
 
     while ($row = mysql_fetch_assoc($result)) {
         echo "<tr>";
@@ -151,8 +151,8 @@
             $aid = $row["id"];
             $dob = $row["dob"];
             echo "<td>" . $aid . "</td>";
-            echo "<td>" . "<a href=\"./show_actor_info.php?aid=$aid\">$name . </a>". "</td>";
-            echo "<td>" . $dob. "</td>";
+            echo "<td>" . "<a href=\"./show_actor_info.php?aid=$aid\">$name . </a>" . "</td>";
+            echo "<td>" . $dob . "</td>";
         echo "</tr>\n";
     }    
     echo "</table>\n";
