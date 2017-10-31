@@ -112,6 +112,15 @@
 
     //Show comment
     $query = "SELECT * FROM Review  WHERE mid=" . $id .";";
+    if (!$result = mysql_query($query)){
+         echo "Connection failed for given query ";
+        exit(1);
+    }
+
+    if (mysql_num_rows($result) != 1){
+        echo "No reviews exist";
+        exit(1);
+    }else{
     while ($row = mysql_fetch_assoc($result)) {
             $name = $row["name"] . " " . $row["last"]; 
             $time = $row["time"];
@@ -120,7 +129,7 @@
             echo = $name . "rates the this movie with score " . $rating . " and left a review at " .$time;
             echo = "comment: " . $comment;
     }  
-
+    }
     mysql_free_result($result);
     mysql_close($db_connection);
     ?>
