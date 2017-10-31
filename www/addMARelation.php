@@ -59,14 +59,16 @@
             exit(1);
         }
 
-        echo "Movie: <select name=\"mid\">\n";
+        echo "Movie: "
+        echo "<select name="movie">";
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row["title"];
             $year = $row["year"];
             $mid = $row["id"];
-            echo "<option value=\"$mid\">$title ($year)</option>\n";
+            echo "<option>" . $title . "</option>";
         }    
-        echo "</select><br />\n";
+        echo "</select><br/>";
+
         mysql_free_result($result);
         mysql_close($db_connection);
 
