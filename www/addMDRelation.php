@@ -45,7 +45,7 @@
     $did = (int)$aid_tmp[0];
 
 
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($aid) && !empty($role)){
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($mid) && !empty($did)){
         $db_connection = mysql_connect("localhost", "cs143", "");
 
         if (!$db_connection){
@@ -60,7 +60,7 @@
         }
 
 
-        $query = "INSERT INTO MovieDirector (mid, did) VALUES ($mid, $did);";
+        $query = "INSERT INTO MovieDirector(mid, did) VALUES ($mid, $did);";
 
         if (!$result = mysql_query($query)){
             echo "Failed to add Movie/Director Relation ";
