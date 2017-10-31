@@ -59,19 +59,17 @@
             exit(1);
         }
 
-        echo "Movie<br\>";
-        echo "<select name=\"movie\" id = \"movie\">";
-        while ($row = mysql_fetch_row($result)) {
-            $movie_title = $row["title"];
-            echo "Here" . $movie_title . "\n";
-            if (is_null($row["title"])){
-                $movie_title = "N/A";
-            }
-            echo "<option value=\"$movie\">$movie_title '</option>";
-        }
-        echo "</select>";
-        echo "end";
+        echo "Movie: <select class=\"form-control\" name=\"mid\">\n";
+        while ($row = mysql_fetch_assoc($result)) {
+            $title = $row["title"];
+            $year = $row["year"];
+            $mid = $row["id"];
+            echo "<option value=\"$mid\">$title ($year)</option>\n";
+        }    
+        echo "</select><br />\n";
+        mysql_free_result($result);
         mysql_close($db_connection);
+
     ?>
 
 
