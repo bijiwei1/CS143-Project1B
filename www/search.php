@@ -72,9 +72,8 @@
     echo "Movie Information is : <br/>";
     echo "<br/><table>";
     echo "<tr>";
-        echo "<td>ID</td>";
-        echo "<td>Name</td>";
-        echo "<td>Date of Birth</td>";
+        echo "<td>Movie</td>";
+        echo "<td>Year</td>";
     echo "</tr>";
 
     while ($row = mysql_fetch_assoc($result)) {
