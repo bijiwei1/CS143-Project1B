@@ -48,47 +48,92 @@
     }    
 
 
-    $aid = (int) $_GET["aid"];
+    $mid = (int) $_GET["mid"];
 
     // Find actor info
     $query = "SELECT * FROM Actor WHERE id=" . $aid . ";";
-
-    //Search in "Movie"
     if (!$result = mysql_query($query)){
-            echo "Failed to search in Movie";
-            exit(1);
+         echo "Connection failed for given query " ;
+        exit(1);
     }
 
-    if (mysql_num_rows($result) === 0)
-        echo "No matching movies found.\n";
-    else
-        echo "Found movies:\n";
+    if (mysql_num_rows($result) != 1){
+        echo "Failed to find actor by given id";
+        exit(1);
+    }
 
-        // Print table with results
-        echo "Showing Results\n";
-        echo "<table>\n";
+    //print actor info
+    echo "Actor Information is : \n";
+    echo "<table>\n";
+    echo "<tr>";
+    for ($i = 0; $i < mysql_num_fields($result); $i++) {
+        $field = mysql_fetch_field($result, $i);
+        echo "<td>" . $field->name . "</td>";
+    }
+    echo "</tr>\n";
+    while ($row = mysql_fetch_row($result)) {
         echo "<tr>";
         for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $field = mysql_fetch_field($result, $i);
-            echo "<td>" . $field->name . "</td>";
+            $val = $row[$i];
+            if (is_null($val)){
+                $val = "N/A";
+            }
+            echo "<td>" . $val . "</td>";
         }
+        echo "</tr>\n";
+    }    
+    echo "</table>\n";
+
+    //Find Actor's Movies and Role info
+    $query = "SELECT ma.role, m.title, ma.mid FROM MovieActor as ma, Movie as m  WHERE ma.aid=" . $aid . " AND ma.mid = m.id;";
+    if (!$result = mysql_query($query)){
+         echo "Connection failed for given query " ;
+        exit(1);
+    }
+    //print actor's movie and row
+    echo "Actor Information is : \n";
+    echo "<table>\n";
+    echo "<tr>";
+    for ($i = 0; $i < mysql_num_fields($result); $i++) {
+        $field = mysql_fetch_field($result, $i);
+        echo "<td>" . $field->name . "</td>";
+    }
+    echo "</tr>\n";
+    while ($row = mysql_fetch_row($result)) {
+        echo "<tr>";
+        for ($i = 0; $i < mysql_num_fields($result); $i++) {
+            $val = $row[$i];
+            if (is_null($val)){
+                $val = "N/A";
+            }
+            echo "<td>" . $val . "</td>";
+        }
+        echo "</tr>\n";
+    }    
+    echo "</table>\n";
+
+    echo "Actor's Movies and Roles";
+    echo "<table>\n";
+        echo "<tr>";
+            echo "<td>" . "Role" . "</td>";
+            echo "<td>" . "Movie" . "</td>";
+        echo"</tr>";
 
         while ($row = mysql_fetch_assoc($result)) {
-            echo "<tr>";
-            $mid = "$row[mid]";
+            $title = $row["title"];
             $role = $row["role"];
-            echo "<td>" . $aid . "</td>";
-            echo "<td>" . "<a href=\"./show_movie_info.php?mid=$mid\">$title ($year)</a>" . "</td>";
+            $mid = $row["mid"];
+            echo "<tr>";
+                echo "<td>" . $role . "</td>";
+                echo "<td>" . "<a href=\"./showMovie.php?mid=$mid\">$title</a>" . "</td>";
             echo "</tr>\n";
         }    
-        echo "</table>\n";  
-         echo "<td><a href=\"./show_movie_info.php?mid=$mid\">$title ($year)</a></td>";
-       
-        mysql_free_result($result);
-        mysql_close($db_connection);
+    echo "</table>\n"
 
-    
+    mysql_free_result($result);
+    mysql_close($db_connection);
     ?>
-    </div>  
+</div>
+
 </body>
 </html>
