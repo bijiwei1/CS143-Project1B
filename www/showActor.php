@@ -92,7 +92,7 @@
     }
 
     //print actor's movie and row
-    echo "Actor's Movies and Roles";
+    echo "<br/><br/>Actor's Movies and Roles";
     echo "<table>\n";
         echo "<tr>";
             echo "<td>" . "Role" . "</td>";
@@ -105,7 +105,7 @@
             $mid = $row["mid"];
             echo "<tr>";
                 echo "<td>" . $role . "</td>";
-                <td>" . "<a href=\"./showMovie.php?id=$mid\">$title</a>" . "</td>";
+                echo "<td>" . "<a href=\"./showMovie.php?id=$mid\">$title</a>" . "</td>";
             echo "</tr>\n";
         }    
     echo "</table>\n";
