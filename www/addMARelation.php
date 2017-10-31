@@ -59,7 +59,7 @@
             exit(1);
         }
 
-        echo "Movie: <select class=\"form-control\" name=\"mid\">\n";
+        echo "Movie: <select name=\"mid\">\n";
         while ($row = mysql_fetch_assoc($result)) {
             $title = $row["title"];
             $year = $row["year"];
