@@ -25,8 +25,8 @@
     <a href="addMARelation.php"> Add Movie/Actor Relation</a>
     <a href="addMDRelation.php"> Add Movie/Director Relation</a>
     <h3>Browsering Content</h3>
-    <a href="showActor.php"> Show Actor information</a>
-    <a href="showMovie.php"> Show Movie information</a>
+    <a href="search.php"> Show Actor information</a>
+    <a href="search.php"> Show Movie information</a>
     </ul>
     <h3>Search Actor/Movie</h3>
     <a href="search.php"> Search Actor/Movie</a>
