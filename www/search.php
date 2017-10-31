@@ -151,7 +151,7 @@
             $aid = $row["id"];
             $dob = $row["dob"];
             echo "<td>" . $aid . "</td>";
-            echo "<td>" . "<a href=\"./show_actor_info.php?aid=$aid\">$name</a>" . "</td>";
+            echo "<td>" . "<a href=\"./showActor.php?aid=$aid\">$name</a>" . "</td>";
             echo "<td>" . $dob . "</td>";
         echo "</tr>\n";
     }    
