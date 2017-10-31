@@ -91,27 +91,6 @@
         exit(1);
     }
     //print actor's movie and row
-    echo "Actor Information is : \n";
-    echo "<table>\n";
-    echo "<tr>";
-    for ($i = 0; $i < mysql_num_fields($result); $i++) {
-        $field = mysql_fetch_field($result, $i);
-        echo "<td>" . $field->name . "</td>";
-    }
-    echo "</tr>\n";
-    while ($row = mysql_fetch_row($result)) {
-        echo "<tr>";
-        for ($i = 0; $i < mysql_num_fields($result); $i++) {
-            $val = $row[$i];
-            if (is_null($val)){
-                $val = "N/A";
-            }
-            echo "<td>" . $val . "</td>";
-        }
-        echo "</tr>\n";
-    }    
-    echo "</table>\n";
-
     echo "Actor's Movies and Roles";
     echo "<table>\n";
         echo "<tr>";
