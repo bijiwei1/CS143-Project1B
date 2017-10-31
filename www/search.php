@@ -139,11 +139,11 @@
     // Print table with results
     echo "Actor Information is : \n";
     echo "<table>\n";
-        echo "<tr>";
-        echo "<td>ID</td>"
-        echo "<td>Name</td>"
+    echo "<tr>";
+        echo "<td>ID</td>";
+        echo "<td>Name</td>";
         echo "<td>Date of Birth</td>";
-        echo "</tr>\n";
+    echo "</tr>\n";
 
     while ($row = mysql_fetch_assoc($result)) {
         echo "<tr>";
