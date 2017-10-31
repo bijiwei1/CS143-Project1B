@@ -29,8 +29,9 @@
     </form>
 
     <?php
-	if (isset($_GET["keyword"]) &&  (!$_GET["keyword"] === ""){
-	
+	if (!isset($_GET["keyword"]) || $_GET["keyword"] === ""){
+		echo "Please enter keyword";
+	}
     //store keywords 
     $keywords = explode(" ", $_GET["keyword"]);
     //echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
@@ -143,7 +144,7 @@
 
     mysql_free_result($result);
     mysql_close($db_connection);
-    }
+
     ?>
     </div>  
 </body>
