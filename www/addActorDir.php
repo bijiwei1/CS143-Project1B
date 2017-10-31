@@ -1,13 +1,6 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <style type="text/css">
-        input[type="text"]{
-            height: 30px;
-            border: 1px solid grey;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 <body>
 <div class="nav_bar">
@@ -86,7 +79,7 @@
         $old_id = $row["id"];
         $new_id = $old_id + 1;
         mysql_free_result($result);
-        echo "old id is " . $old_id . "new id is " . $new_id;
+        //echo "old id is " . $old_id . "new id is " . $new_id;
 
         //Add to "Actor"
         if ($identity === "Actor"){

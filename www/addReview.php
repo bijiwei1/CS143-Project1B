@@ -70,7 +70,7 @@
         }
         mysql_close($db_connection); 
 
-        echo "Successfully added Review/n";
+        echo "Successfully added Review";
     }   
 
 

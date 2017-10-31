@@ -1,18 +1,6 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <style  type="text/css">
-    table, th, td {
-        border: 1px solid blue;
-        
-    }
-    input[type="text"]{
-            height: 30px;
-            border: 1px solid grey;
-            border-radius: 5px;
-            width: 30%;
-        }
-    </style>
 </head>
 
 <body>
@@ -47,7 +35,7 @@
 	}
     //store keywords 
     $keywords = explode(" ", $_GET["keyword"]);
-    echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
+    //echo "Keywords are" . $keywords . "\n" . "size is " . count($keywords);
 
     //Search for Movie
     for ($i = 0; $i < (count($keywords) - 1); $i++){
@@ -82,8 +70,7 @@
         echo "Found movies:\n";
 
     // Print table with results
-    echo "Showing Results\n";
-    echo "<table>\n";
+    echo "<br/><table>\n";
     echo "<tr>";
     for ($i = 0; $i < mysql_num_fields($result); $i++) {
         $field = mysql_fetch_field($result, $i);
@@ -99,9 +86,9 @@
             }
             echo "<td>" . $val . "</td>";
         }
-        echo "</tr>\n";
+        echo "</tr>";
     }    
-    echo "</table>\n";
+    echo "</table><br/>";
 
     //Search for Actor
     $condition = ""; 
@@ -133,11 +120,11 @@
     if (mysql_num_rows($result) === 0)
         echo "No matching Actor found.\n";
     else
-        echo "Found Actor:\n";
+        echo "\nFound Actor:\n";
 
     // Print table with results
     echo "Actor Information is : \n";
-    echo "<table>\n";
+    echo "<br/><table>\n";
     echo "<tr>";
         echo "<td>ID</td>";
         echo "<td>Name</td>";
